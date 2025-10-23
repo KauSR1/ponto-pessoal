@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de Controle de Ponto Online">
+    <meta name="author" content="Seu Nome">
+    <title>TimeTracker - Sistema de Controle de Ponto</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="src/css/reset.css">
+    <link rel="stylesheet" href="src/css/variables.css">
+    <link rel="stylesheet" href="src/css/layout.css">
+    <link rel="stylesheet" href="src/css/components.css">
+    <link rel="stylesheet" href="src/css/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">⏱️</span>
+            <span>Controle de Ponto</span>
+        </div>
+        <div class="user-greeting">Olá, <span id="userName">Usuário</span></div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="menu-section">
+                <div class="menu-title">Menu</div>
+                <div class="menu-item active" data-page="dashboard">
+                    <span class="menu-icon">📊</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="menu-item" data-page="calendar">
+                    <span class="menu-icon">📅</span>
+                    <span>Calendário</span>
+                </div>
+                <div class="menu-item" data-page="reports">
+                    <span class="menu-icon">📈</span>
+                    <span>Relatórios</span>
+                </div>
+                <div class="menu-item" data-page="history">
+                    <span class="menu-icon">📁</span>
+                    <span>Histórico</span>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-title">Configurações</div>
+                <div class="menu-item" data-page="profile">
+                    <span class="menu-icon">👤</span>
+                    <span>Perfil</span>
+                </div>
+                <div class="menu-item" data-page="settings">
+                    <span class="menu-icon">⚙️</span>
+                    <span>Preferências</span>
+                </div>
+            </div>
+
+            <div class="action-section">
+                <div class="action-title">Ações Rápidas</div>
+                <div class="punch-buttons">
+                    <button class="punch-btn btn-entrada" id="btnEntrada">
+                        <span>🚪</span> Entrada
+                    </button>
+                    <button class="punch-btn btn-pausa" id="btnPausa" disabled>
+                        <span>☕</span> Pausa
+                    </button>
+                    <button class="punch-btn btn-retorno" id="btnRetorno" disabled>
+                        <span>▶️</span> Retorno
+                    </button>
+                    <button class="punch-btn btn-saida" id="btnSaida" disabled>
+                        <span>🏠</span> Saída
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <span>Dashboard</span>
+                <span>›</span>
+                <span class="breadcrumb-active">Controle de Ponto</span>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Controle de Ponto</h1>
+                <p class="page-subtitle">Gerencie seus horários e registros de trabalho</p>
+            </div>
+
+            <!-- Clock Widget -->
+            <div class="clock-widget">
+                <div class="clock-time" id="currentTime">00:00:00</div>
+                <div class="clock-date" id="currentDate">---</div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Horas Hoje</div>
+                    <div class="stat-value" id="hoursToday">00:00</div>
+                    <div class="stat-helper">Tempo trabalhado</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Primeira Entrada</div>
+                    <div class="stat-value" id="firstEntry">--:--</div>
+                    <div class="stat-helper">Início do expediente</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Tempo em Pausa</div>
+                    <div class="stat-value" id="breakTime">00:00</div>
+                    <div class="stat-helper">Total de intervalos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Saída Prevista</div>
+                    <div class="stat-value" id="expectedExit">--:--</div>
+                    <div class="stat-helper">Com base em 8h</div>
+                </div>
+            </div>
+
+            <!-- Timeline Card -->
+            <div class="content-card">
+                <div class="card-header">
+                    <div class="card-title">Registros de Hoje</div>
+                    <span class="status-badge status-offline" id="statusBadge">Offline</span>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-grid" id="timelineGrid">
+                        <div class="empty-timeline">
+                            <div class="empty-icon">📋</div>
+                            <div>Nenhum registro ainda hoje</div>
+                            <div style="font-size: 13px; margin-top: 8px; color: #bbb;">
+                                Clique em "Entrada" para começar seu expediente
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activities Card -->
+            <div class="content-card">
+                <div class="card-header">
+                    <div class="card-title">Atividades do Dia</div>
+                </div>
+                <div class="activities-section">
+                    <div class="activity-list" id="activityList">
+                        <div class="activity-empty">
+                            <div style="font-size: 32px; margin-bottom: 8px; opacity: 0.5;">📝</div>
+                            <div>Nenhuma atividade registrada</div>
+                            <div style="font-size: 12px; margin-top: 8px; color: #bbb;">
+                                As atividades aparecerão aqui conforme você adiciona descrições aos registros
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-header" id="modalTitle">Adicionar Descrição</div>
+            <textarea 
+                class="modal-textarea" 
+                id="modalTextarea"
+                placeholder="Descreva o que você fez neste período...&#10;&#10;Exemplo:&#10;• Desenvolvimento de novas funcionalidades&#10;• Reuniões com a equipe&#10;• Análise de requisitos"
+            ></textarea>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-cancel" id="btnModalCancel">Cancelar</button>
+                <button class="modal-btn modal-btn-save" id="btnModalSave">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="config/config.js"></script>
+    <script src="src/js/clock.js"></script>
+    <script src="src/js/punch.js"></script>
+    <script src="src/js/timeline.js"></script>
+    <script src="src/js/activities.js"></script>
+    <script src="src/js/modal.js"></script>
+    <script src="src/js/app.js"></script>
+</body>
+</html>
