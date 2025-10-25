@@ -26,7 +26,7 @@ Este é um sistema web de controle de ponto que permite:
 
 ### ✅ Desenvolvimetno no Front-end:
 - [x] Relógio em tempo real (data e hora)
-- [] Botões de registro (Entrada, Pausa, Retorno, Saída)
+- [x] Botões de registro (Entrada, Pausa, Retorno, Saída)
 - [] Timeline de registros
 - [] Cálculo de horas trabalhadas
 - [] Tempo em pausa
