@@ -4,6 +4,17 @@ const btnRetornar = document.getElementById('btnRetorno');
 const btnFinalizar = document.getElementById('btnSaida');
 
   btnIniciar.addEventListener("click", ()=>{
+    const horarioEntrada = new Date();
+    const horas = horarioEntrada.getHours().toString().padStart(2, '0'); 
+    const minutos = horarioEntrada.getMinutes().toString().padStart(2, '0');
+    document.getElementById('firstEntry').textContent = `${horas}:${minutos}`;
+
+    const horarioSaidaPrevisto = new Date(horarioEntrada);
+    horarioSaidaPrevisto.setHours(horarioEntrada.getHours() + 8);
+    const horaPrevista = horarioSaidaPrevisto.getHours().toString().padStart(2, '0'); 
+    const minutoPrevisto = horarioSaidaPrevisto.getMinutes().toString().padStart(2, '0');
+    document.getElementById('expectedExit').textContent = `${horaPrevista}:${minutoPrevisto}`;
+
     btnIniciar.disabled = true;
     btnPausar.disabled = false;
     btnRetornar.disabled = true;
