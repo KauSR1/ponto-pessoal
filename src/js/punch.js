@@ -2,11 +2,19 @@ const btnIniciar = document.getElementById('btnEntrada');
 const btnPausar = document.getElementById('btnPausa');
 const btnRetornar = document.getElementById('btnRetorno');
 const btnFinalizar = document.getElementById('btnSaida');
+const statusTrabalho = document.getElementById('statusBadge');
 
   btnIniciar.addEventListener("click", ()=>{
+
+    statusTrabalho.textContent = 'Trabalhando';
+    statusTrabalho.classList.remove('status-idle', 'status-paused', 'status-offline');
+    statusTrabalho.classList.add('status-working');
+
+    statusTrabalho.classList.add('status-working');
+
     const horarioEntrada = new Date();
     const horas = horarioEntrada.getHours().toString().padStart(2, '0'); 
-    const minutos = horarioEntrada.getMinutes().toString().padStart(2, '0');
+    const minutos = horarioEntrada.getMinutes().toString().padStart(2, '0'); 
     document.getElementById('firstEntry').textContent = `${horas}:${minutos}`;
 
     const horarioSaidaPrevisto = new Date(horarioEntrada);
@@ -22,6 +30,8 @@ const btnFinalizar = document.getElementById('btnSaida');
   });
   
   btnPausar.addEventListener("click", ()=>{
+    statusTrabalho.textContent = 'em pausa';
+    statusTrabalho.classList.add('status-paused');
     btnIniciar.disabled = true;
     btnPausar.disabled = true;
     btnRetornar.disabled = false;
@@ -29,6 +39,9 @@ const btnFinalizar = document.getElementById('btnSaida');
   });
   
   btnRetornar.addEventListener("click", ()=>{
+    statusTrabalho.textContent = 'Trabalhando';
+    statusTrabalho.classList.remove('status-idle', 'status-paused', 'status-offline');
+    statusTrabalho.classList.add('status-working');
     btnIniciar.disabled = true;
     btnPausar.disabled = false;
     btnRetornar.disabled = true;
@@ -36,8 +49,12 @@ const btnFinalizar = document.getElementById('btnSaida');
   });
 
   btnFinalizar.addEventListener("click", ()=>{
+    statusTrabalho.textContent = 'Offline';
+    statusTrabalho.classList.remove('status-idle', 'status-paused', 'status-offline');
+    statusTrabalho.classList.add('status-offline');
     btnIniciar.disabled = false;
     btnPausar.disabled = true;
     btnRetornar.disabled = true;
     btnFinalizar.disabled = true;
   });
+
