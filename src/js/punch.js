@@ -10,8 +10,6 @@ const statusTrabalho = document.getElementById('statusBadge');
     statusTrabalho.classList.remove('status-idle', 'status-paused', 'status-offline');
     statusTrabalho.classList.add('status-working');
 
-    statusTrabalho.classList.add('status-working');
-
     const horarioEntrada = new Date();
     const horas = horarioEntrada.getHours().toString().padStart(2, '0'); 
     const minutos = horarioEntrada.getMinutes().toString().padStart(2, '0'); 
