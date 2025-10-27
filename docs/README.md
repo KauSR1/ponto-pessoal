@@ -30,10 +30,10 @@ Este é um sistema web de controle de ponto que permite:
 - [] Timeline de registros
 - [] Cálculo de horas trabalhadas
 - [] Tempo em pausa
-- [] Saída prevista
+- [x] Saída prevista
 - [] Descrição de atividades por registro
 - [] Lista de atividades do dia
-- [] Design responsivo
+- [x] Design responsivo
 - [] Armazenamento local (localStorage)
 
 ### 🚧 Em Desenvolvimento Beck-end:
