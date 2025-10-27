@@ -48,6 +48,9 @@ const statusTrabalho = document.getElementById('statusBadge');
 
   btnFinalizar.addEventListener("click", ()=>{
     statusTrabalho.textContent = 'Offline';
+    document.getElementById('firstEntry').textContent = "--:--";
+    document.getElementById('expectedExit').textContent = "--:--";
+    
     statusTrabalho.classList.remove('status-idle', 'status-paused', 'status-offline');
     statusTrabalho.classList.add('status-offline');
     btnIniciar.disabled = false;
