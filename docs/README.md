@@ -9,19 +9,18 @@ Este é um sistema web de controle de ponto que permite:
 - ✅ Calcular automaticamente horas trabalhadas
 - ✅ Adicionar descrições de atividades a cada registro
 - ✅ Visualizar histórico em timeline
-- ✅ Gerar relatórios de produtividade
 
 ## 🚀 Tecnologias
 
 ### Front-end
 - HTML5
-- CSS3 (Vanilla CSS com variáveis)
-- JavaScript (ES6+ / Modules)
+- CSS3
+- JavaScript
 
 ### Back-end (Em desenvolvimento)
 - Java (Spring Boot) OU PHP
 - MySQL
-- 
+  
 ## 🎯 Funcionalidades Atuais
 
 ### ✅ Desenvolvimetno no Front-end:
@@ -29,7 +28,7 @@ Este é um sistema web de controle de ponto que permite:
 - [x] Botões de registro (Entrada, Pausa, Retorno, Saída)
 - [] Timeline de registros
 - [] Cálculo de horas trabalhadas
-- [] Tempo em pausa
+- [x] Tempo em pausa
 - [x] Saída prevista
 - [] Descrição de atividades por registro
 - [] Lista de atividades do dia
