@@ -4,6 +4,7 @@ const btnRetornar = document.getElementById('btnRetorno');
 const btnFinalizar = document.getElementById('btnSaida');
 const statusTrabalho = document.getElementById('statusBadge');
 const displayTempoPausa = document.getElementById('breakTime');
+const displayTrabalhado = document.getElementById('hoursToday');
 
 let tempoInicialPausa = null;
 let intervaloPausa = null;
@@ -30,19 +31,45 @@ function resetarPausa(){
   displayTempoPausa.textContent = '00:00';
 }
 
+let inicioDoTrabalho = null;
+let saidaDoTrabalho = null;
+
+function atualizarDisplayTrabalho(){
+  const Trabalhando = new Date();
+  const tempoTotalTrabalhado = (Trabalhando - inicioDoTrabalho) - tempoTotalPausaEmMs;
+
+  const totalMinutosT = Math.floor(tempoTotalTrabalhado / 60000);
+  const horasT = Math.floor(totalMinutosT / 60);
+  const minutosT = totalMinutosT % 60;
+
+  const horasTrabalhadas = horasT.toString().padStart(2, '0');
+  const minutoTrabalhados = minutosT.toString().padStart(2, '0');
+  displayTrabalhado.textContent = `${horasTrabalhadas}:${minutoTrabalhados}`;
+}
+
+function resetarTrabalho(){
+  clearInterval(saidaDoTrabalho);
+  inicioDoTrabalho = null;
+  saidaDoTrabalho = null;
+  displayTrabalhado.textContent = '00:00';
+}
+
+
   btnIniciar.addEventListener("click", ()=>{
+
+    inicioDoTrabalho = new Date();
+    saidaDoTrabalho = setInterval(atualizarDisplayTrabalho, 60000);
+    atualizarDisplayTrabalho();
 
     statusTrabalho.textContent = 'Trabalhando';
     statusTrabalho.classList.remove('status-idle', 'status-paused', 'status-offline');
     statusTrabalho.classList.add('status-working');
-
-    const horarioEntrada = new Date();
-    const horas = horarioEntrada.getHours().toString().padStart(2, '0'); 
-    const minutos = horarioEntrada.getMinutes().toString().padStart(2, '0'); 
+    const horas = inicioDoTrabalho.getHours().toString().padStart(2, '0'); 
+    const minutos = inicioDoTrabalho.getMinutes().toString().padStart(2, '0'); 
     document.getElementById('firstEntry').textContent = `${horas}:${minutos}`;
 
-    const horarioSaidaPrevisto = new Date(horarioEntrada);
-    horarioSaidaPrevisto.setHours(horarioEntrada.getHours() + 8);
+    const horarioSaidaPrevisto = new Date(inicioDoTrabalho);
+    horarioSaidaPrevisto.setHours(inicioDoTrabalho.getHours() + 8);
     const horaPrevista = horarioSaidaPrevisto.getHours().toString().padStart(2, '0'); 
     const minutoPrevisto = horarioSaidaPrevisto.getMinutes().toString().padStart(2, '0');
     document.getElementById('expectedExit').textContent = `${horaPrevista}:${minutoPrevisto}`;
@@ -54,13 +81,16 @@ function resetarPausa(){
   });
   
   btnPausar.addEventListener("click", ()=>{
-
+    clearInterval(saidaDoTrabalho);
     tempoInicialPausa = new Date();
     intervaloPausa = setInterval(atualizarDisplayPausa, 60000);
     atualizarDisplayPausa();
 
     statusTrabalho.textContent = 'em pausa';
     statusTrabalho.classList.add('status-paused');
+    statusTrabalho.classList.remove('status-idle', 'status-working', 'status-offline');
+    statusTrabalho.classList.add('status-paused');
+    
     btnIniciar.disabled = true;
     btnPausar.disabled = true;
     btnRetornar.disabled = false;
@@ -68,6 +98,8 @@ function resetarPausa(){
   });
   
   btnRetornar.addEventListener("click", ()=>{
+    saidaDoTrabalho  = setInterval(atualizarDisplayTrabalho, 60000);
+    atualizarDisplayTrabalho();
 
     clearInterval(intervaloPausa);
     const tempoEmPause = new Date() - tempoInicialPausa;
@@ -84,6 +116,8 @@ function resetarPausa(){
 
   btnFinalizar.addEventListener("click", ()=>{
 
+    clearInterval(saidaDoTrabalho);
+    resetarTrabalho();
     resetarPausa();
     statusTrabalho.textContent = 'Offline';
     document.getElementById('firstEntry').textContent = "--:--";
