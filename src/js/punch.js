@@ -100,11 +100,12 @@ function resetarTrabalho(){
   
   btnRetornar.addEventListener("click", ()=>{
     saidaDoTrabalho  = setInterval(atualizarDisplayTrabalho, 60000);
-    atualizarDisplayTrabalho();
 
     clearInterval(intervaloPausa);
     const tempoEmPause = new Date() - tempoInicialPausa;
     tempoTotalPausaEmMs += tempoEmPause;
+    
+    atualizarDisplayTrabalho();
 
     statusTrabalho.textContent = 'Trabalhando';
     statusTrabalho.classList.remove('status-idle', 'status-paused', 'status-offline');
