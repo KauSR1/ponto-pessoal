@@ -13,8 +13,9 @@ let tempoTotalPausaEmMs = 0;
 function atualizarDisplayPausa(){
   const agora = new Date();
   const diferencaMs = agora - tempoInicialPausa;
+  const totalPausas = diferencaMs + tempoTotalPausaEmMs;
 
-  const totalMinutos = Math.floor(diferencaMs / 60000);
+  const totalMinutos = Math.floor(totalPausas / 60000);
   const horas = Math.floor(totalMinutos / 60);
   const minutos = totalMinutos % 60;
 
