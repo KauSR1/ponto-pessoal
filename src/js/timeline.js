@@ -27,20 +27,17 @@ function adicionarRegistro(tipo) {
   const config = tiposRegistro[tipo];
 
   const html = `
-  <div class = "timeline-grid" id="timelineGrid">
   <div class = "timeline-row">
     <div class="timeline-date today">
       <div class="timeline-day">6</div>
       <div class="timeline-weekday">qui.</div>
     </div>
-      <div class="timeline-cell">
+    <div class="timeline-cell">
       <div class="punch-dot ${config.classe}">${config.icone}</div>
       <div class="punch-time">${hora}:${minuto}</div>
       <div style="font-size: 11px; color: #999;">${config.texto}</div>
       <div class="add-description-btn">➕ Adicionar descrição</div>
     </div>
-  </div>
-  </div>
   </div>
   `;
 
