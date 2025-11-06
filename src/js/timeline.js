@@ -3,6 +3,8 @@ const pausaTimeLine = document.getElementById('btnPausa');
 const retornoTimeLine = document.getElementById('btnRetorno');
 const saidaTimeLine = document.getElementById('btnSaida');
 const timeLineGrid = document.getElementById('timelineGrid');
+const timeLineEmpty = document.getElementsByClassName('empty-timeline');
+let timeLineRow = document.querySelector('.timeline-row');
 
 let array = []
 const tiposRegistro = {
@@ -17,32 +19,47 @@ function adicionarRegistro(tipo) {
   const hora = agora.getHours().toString().padStart(2, '0');
   const minuto = agora.getMinutes().toString().padStart(2, '0');
   
+  const hoje = new Date();
+  const dia = hoje.getDate().toString().padStart(2, '0');
+  const semana = primeiraMaiuscula(hoje.toLocaleDateString('pt-BR', { weekday: 'short' }));
+  
+  if (array.length === 0) {
+    timeLineEmpty[0].style.display = 'none';
+  }
+  
   const registro = {
     tipo: tipo,
     hora: `${hora}:${minuto}`,
-    data: agora
+    data: agora,
+    dia: dia,
+    semana: semana
   };
   array.push(registro);
   
   const config = tiposRegistro[tipo];
-
-  const html = `
-  <div class = "timeline-row">
-    <div class="timeline-date today">
-      <div class="timeline-day">6</div>
-      <div class="timeline-weekday">qui.</div>
-    </div>
+  
+  if (!timeLineRow) {
+    const htmlDia = `
+    <div class = "timeline-row">
+      <div class="timeline-date today">
+        <div class="timeline-day">${dia}</div>
+        <div class="timeline-weekday">${semana}</div>
+      </div>
+    </div>`;
+    
+    timeLineGrid.insertAdjacentHTML('beforeend', htmlDia);
+    timeLineRow = document.querySelector(".timeline-row");
+  }
+    const htmlEvento = `
     <div class="timeline-cell">
       <div class="punch-dot ${config.classe}">${config.icone}</div>
-      <div class="punch-time">${hora}:${minuto}</div>
-      <div style="font-size: 11px; color: #999;">${config.texto}</div>
-      <div class="add-description-btn">➕ Adicionar descrição</div>
-    </div>
-  </div>
-  `;
-
-  timeLineGrid.insertAdjacentHTML('beforeend', html)
-}
+        <div class="punch-time">${hora}:${minuto}</div>
+        <div style="font-size: 11px; color: #999;">${config.texto}</div>
+        <div class="add-description-btn">➕ Adicionar descrição</div>
+      </div>`;
+      
+    timeLineRow.insertAdjacentHTML('beforeend', htmlEvento);
+    }
 
 entradaTimeLine.addEventListener("click", () => adicionarRegistro('entrada'));
 pausaTimeLine.addEventListener("click", () => adicionarRegistro('pausa'));
