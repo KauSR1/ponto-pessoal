@@ -10,7 +10,7 @@ Este é um sistema web de controle de ponto que permite:
 - ✅ Adicionar descrições de atividades a cada registro
 - ✅ Visualizar histórico em timeline
 
-## 🚀 Tecnologias
+## 🚀 Tecnologias (Em desenvolvimento)
 
 ### Front-end
 - HTML5
