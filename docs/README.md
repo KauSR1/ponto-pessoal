@@ -30,7 +30,7 @@ Este é um sistema web de controle de ponto que permite:
 - [x] Cálculo de horas trabalhadas
 - [x] Tempo em pausa
 - [x] Saída prevista
-- [] Descrição de atividades por registro
+- [x] Descrição de atividades por registro
 - [] Lista de atividades do dia
 - [x] Design responsivo
 - [] Armazenamento local (localStorage)
