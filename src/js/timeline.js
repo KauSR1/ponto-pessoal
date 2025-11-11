@@ -13,8 +13,8 @@ const tiposRegistro = {
   retorno: { icone: '▶️', texto: 'Retorno', classe: 'punch-retorno' },
   saida: { icone: '🏠', texto: 'Saída', classe: 'punch-saida' }
 };
-
 function adicionarRegistro(tipo) {
+
   const agora = new Date();
   const hora = agora.getHours().toString().padStart(2, '0');
   const minuto = agora.getMinutes().toString().padStart(2, '0');
@@ -32,7 +32,8 @@ function adicionarRegistro(tipo) {
     hora: `${hora}:${minuto}`,
     data: agora,
     dia: dia,
-    semana: semana
+    semana: semana,
+    descricao: ''
   };
   array.push(registro);
   
@@ -59,7 +60,21 @@ function adicionarRegistro(tipo) {
       </div>`;
       
     timeLineRow.insertAdjacentHTML('beforeend', htmlEvento);
-    }
+
+const ultimaCelula = timeLineRow.lastElementChild;
+const botaoDescricao = ultimaCelula.querySelector('.add-description-btn');
+  
+  botaoDescricao.addEventListener("click", () =>{
+    console.log('o botao foi clicado');
+    abrirModalDescricao();
+  });
+}
+
+  function abrirModalDescricao(){
+    const modal = document.getElementById('modalOverlay');
+    modal.classList.add('active');
+  }
+
 
 entradaTimeLine.addEventListener("click", () => adicionarRegistro('entrada'));
 pausaTimeLine.addEventListener("click", () => adicionarRegistro('pausa'));
