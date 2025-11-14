@@ -6,13 +6,17 @@ const timeLineGrid = document.getElementById('timelineGrid');
 const timeLineEmpty = document.getElementsByClassName('empty-timeline');
 let timeLineRow = document.querySelector('.timeline-row');
 
-let array = []
+window.arrayRegistros = [];
 const tiposRegistro = {
   entrada: { icone: '🚪', texto: 'Entrada', classe: 'punch-entrada' },
   pausa: { icone: '☕', texto: 'Pausa', classe: 'punch-pausa' },
   retorno: { icone: '▶️', texto: 'Retorno', classe: 'punch-retorno' },
   saida: { icone: '🏠', texto: 'Saída', classe: 'punch-saida' }
 };
+
+window.indiceEditando = null;
+
+
 function adicionarRegistro(tipo) {
 
   const agora = new Date();
@@ -23,7 +27,7 @@ function adicionarRegistro(tipo) {
   const dia = hoje.getDate().toString().padStart(2, '0');
   const semana = primeiraMaiuscula(hoje.toLocaleDateString('pt-BR', { weekday: 'short' }));
   
-  if (array.length === 0) {
+  if (window.arrayRegistros.length === 0) {
     timeLineEmpty[0].style.display = 'none';
   }
   
@@ -35,7 +39,7 @@ function adicionarRegistro(tipo) {
     semana: semana,
     descricao: ''
   };
-  array.push(registro);
+  window.arrayRegistros.push(registro);
   
   const config = tiposRegistro[tipo];
   
@@ -56,16 +60,16 @@ function adicionarRegistro(tipo) {
       <div class="punch-dot ${config.classe}">${config.icone}</div>
         <div class="punch-time">${hora}:${minuto}</div>
         <div style="font-size: 11px; color: #999;">${config.texto}</div>
-        <div class="add-description-btn">➕ Adicionar descrição</div>
+        <div class="add-description-btn" id = "btnDesc">➕ Adicionar descrição</div>
       </div>`;
       
-    timeLineRow.insertAdjacentHTML('beforeend', htmlEvento);
+  timeLineRow.insertAdjacentHTML('beforeend', htmlEvento);
 
-const ultimaCelula = timeLineRow.lastElementChild;
+let ultimaCelula = timeLineRow.lastElementChild;
 const botaoDescricao = ultimaCelula.querySelector('.add-description-btn');
   
   botaoDescricao.addEventListener("click", () =>{
-    console.log('o botao foi clicado');
+    window.indiceEditando = window.arrayRegistros.length -1;
     abrirModalDescricao();
   });
 }
