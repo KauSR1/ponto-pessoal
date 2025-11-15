@@ -12,6 +12,7 @@ modalBtnSave.addEventListener('click', () => {
   }
 
   window.arrayRegistros[window.indiceEditando].descricao = texto;
+  renderizarAtividades(); 
   
   console.log('Salvo:', window.arrayRegistros[window.indiceEditando]);
   
