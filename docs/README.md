@@ -31,7 +31,7 @@ Este é um sistema web de controle de ponto que permite:
 - [x] Tempo em pausa
 - [x] Saída prevista
 - [x] Descrição de atividades por registro
-- [] Lista de atividades do dia
+- [x] Lista de atividades do dia
 - [x] Design responsivo
 - [] Armazenamento local (localStorage)
 
