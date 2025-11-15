@@ -13,6 +13,8 @@ modalBtnSave.addEventListener('click', () => {
 
   window.arrayRegistros[window.indiceEditando].descricao = texto;
   renderizarAtividades(); 
+  salvarInfJson();
+  renderizarTudo();
   
   console.log('Salvo:', window.arrayRegistros[window.indiceEditando]);
   
