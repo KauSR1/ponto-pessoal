@@ -7,7 +7,7 @@ const timeLineEmpty = document.getElementsByClassName('empty-timeline');
 let timeLineRow = document.querySelector('.timeline-row');
 
 window.arrayRegistros = [];
-const tiposRegistro = {
+window.tiposRegistro = {
   entrada: { icone: '🚪', texto: 'Entrada', classe: 'punch-entrada' },
   pausa: { icone: '☕', texto: 'Pausa', classe: 'punch-pausa' },
   retorno: { icone: '▶️', texto: 'Retorno', classe: 'punch-retorno' },
