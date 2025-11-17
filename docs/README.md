@@ -33,7 +33,7 @@ Este é um sistema web de controle de ponto que permite:
 - [x] Descrição de atividades por registro
 - [x] Lista de atividades do dia
 - [x] Design responsivo
-- [] Armazenamento local (localStorage)
+- [x] Armazenamento local (localStorage) "com pequenos bugs"
 
 ### 🚧 Em Desenvolvimento Beck-end:
 - [ ] Integração com back-end (API REST)
